@@ -1,4 +1,16 @@
+/*
+============================================
+Title: NodeBucket
+Author: Clayton Stacy
+Date: 24 Sept 2020
+Modified by: Clayton Stacy
+Description: Application to build to do lists
+============================================
+*/
+
 // This file can be replaced during build by using the `fileReplacements` array.
+
+
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
