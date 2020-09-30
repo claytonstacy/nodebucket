@@ -16,6 +16,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 const Employee = require('./models/employee');
+const EmployeeApi = require('./routes/employee-api');
+const TaskApi = require('./routes/task-api');
 
 /**
  * App configurations
@@ -56,28 +58,11 @@ db.once('open', function() {
   console.log('Connection to MongoDB Atlas successful!');
 })
 
-// Endpoint for querying single employee by ID
-app.get('/api/employees/:empId', async(req, res) => {
-  try {
-    Employee.findOne({'empId': req.params.empId}, function(err, employee) {
-      if(err) {
-        console.log(err);
-        res.status(404).send({
-          'message': 'Internal Server Error'
-        })
-      } else {
-        console.log(employee);
-        res.json(employee);
-      }
-    })
 
-  } catch (e) {
-    console.log(e);
-    res.status(500).send({
-      'message': 'Internal Server Error'
-    })
-  }
-})
+app.use('/api/employees', EmployeeApi);
+app.use('/api/tasks', TaskApi)
+// Endpoint for querying single employee by ID
+
 
 
 /**
