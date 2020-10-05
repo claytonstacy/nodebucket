@@ -1,1 +1,32 @@
-<router-outlet></router-outlet>
+<div fxLayout="column" class="auth-container">
+
+  <!-- navigation -->
+  <nav fx-fle>
+    <mat-toolbar color="primary">
+      <!-- navbar container -->
+      <div class="navbar-container">
+
+      </div>
+
+    </mat-toolbar>
+  </nav>
+
+  <!-- main content -->
+  <div fxFlex>
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <!-- footer -->
+  <div>
+    <footer class="footer">
+      <mat-toolbar class="footer-content" color="accent">
+        <p>
+          &copy; {{year | date: 'yyyy'}} - nodebucket - <a href="https://www.bellevue.edu/" class="bu-link" target="_blank">Bellevue University</a>
+        </p>
+      </mat-toolbar>
+    </footer>
+  </div>
+
+</div>
