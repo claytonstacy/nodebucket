@@ -1,0 +1,13 @@
+.animation-fill {
+  stroke-dasharray: 1300 2600;
+  stroke-dashoffset: 1300;
+  animation: number-animation 1.5s linear forwards;
+}
+@keyframes number-animation{
+  0% {
+    stroke-dashoffset: 1300;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}

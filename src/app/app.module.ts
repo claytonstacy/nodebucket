@@ -29,6 +29,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CookieService } from 'ngx-cookie-service';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { MatDividerModule } from '@angular/material/divider';
+import {DragDropModule } from '@angular/cdk/drag-drop';
+import { ContactComponent } from './pages/contact/contact.component';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +41,10 @@ import { CookieService } from 'ngx-cookie-service';
     HomeComponent,
     BaseLayoutComponent,
     AuthLayoutComponent,
-    SigninComponent
+    SigninComponent,
+    NotFoundComponent,
+    ContactComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +59,9 @@ import { CookieService } from 'ngx-cookie-service';
     ReactiveFormsModule,
     MatCardModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDividerModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

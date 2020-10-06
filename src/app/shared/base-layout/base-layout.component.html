@@ -9,7 +9,9 @@
           <button class="logo" routerLink="/" mat-button>nodebucket</button>
 
           <button class="navbar-link" routerLink="/" mat-button>Home</button>
-          <button class="navbar-link" mat-button>About</button>
+          <button class="navbar-link" routerLink="/about" mat-button>About</button>
+          <button class="navbar-link" mat-button routerLink="/contact">Contact</button>
+          <button class="navbar-link" mat-button (click)="logout()">Logout</button>
         </div>
 
       </mat-toolbar>
@@ -25,7 +27,7 @@
     <!-- footer -->
     <div fxFlex>
       <footer class="footer">
-        <mat-toolbar class="footer-content" color="accent">
+        <mat-toolbar class="footer-content" color="primary">
           <p>
             &copy; {{year | date: 'yyyy'}} - nodebucket - <a href="https://www.bellevue.edu/" class="bu-link" target="_blank">Bellevue University</a>
           </p>

@@ -18,6 +18,7 @@ const employeeSchema = new Schema({
   firstName: {type: String },
   lastName: {type: String },
   todo: [Item],
+  doing: [Item],
   done: [Item]
 
 }, { collection: 'employee' });

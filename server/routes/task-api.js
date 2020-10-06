@@ -18,7 +18,7 @@ const router = express.Router();
 
 router.get('/:empId', async(req, res) => {
   try {
-    Employee.findOne({'empId': req.params.empId }, 'empId todo done', function(err, employee) {
+    Employee.findOne({'empId': req.params.empId }, 'empId todo doing done', function(err, employee) {
       if(err) {
         console.log(err);
         const mongoDbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
@@ -26,7 +26,7 @@ router.get('/:empId', async(req, res) => {
       } else {
         console.log(employee);
         const employeeTasksResponse = new BaseResponse('200', 'Query Successful', employee)
-        res.json(employee)
+        res.json(employeeTasksResponse.toObject())
       }
     })
   } catch (error) {
@@ -80,9 +80,10 @@ router.put('/:empId', async(req, res) => {
         const updateTaskMongoDbErrorResponse = new ErrorResponse('500', 'Internal Server Error', err);
         res.status(500).send(updateTaskMongoDbErrorResponse.toObject());
       } else {
-        console.log(employee);
+        console.log('This is the request', req.body);
         employee.set({
           todo: req.body.todo,
+          doing: req.body.doing,
           done: req.body.done
         });
         employee.save(function(err, updatedEmployee) {
@@ -121,6 +122,7 @@ router.delete('/:empId/:taskId', async(req, res) => {
         console.log(employee);
         console.log('Found employee tasks', JSON.stringify(employee.todo));
         const todoItem = employee.todo.find(item => item._id.toString() === req.params.taskId);
+        const doingItem = employee.doing.find(item => item._id.toString() === req.params.taskId);
         const doneItem = employee.done.find(item => item._id.toString() === req.params.taskId);
         if(todoItem) {
           employee.todo.id(todoItem._id).remove();
@@ -135,6 +137,19 @@ router.delete('/:empId/:taskId', async(req, res) => {
               res.json(deleteTodoItemSuccessResponse.toObject());
             }
           })
+        } else if (doingItem) {
+          employee.doing.id(doingItem._id).remove();
+          employee.save(function(err, updatedDoingItem) {
+            if(err) {
+              console.log(err);
+              const deleteDoingItemOnSaveMongoDbErrorResponse = new ErrorResponsed('500', 'Internal Server Error', err);
+              res.status(500).send(deleteDoingItemOnSaveMongoDbErrorResponse.toObject);
+            }else {
+              console.log(updatedDoingItem);
+              const deleteDoingItemSuccesResponse = new BaseResponse('500', 'Success', updatedDoingItem);
+              res.status(200).send(deleteDoingItemSuccesResponse.toObject())
+            }
+          });
         } else if (doneItem) {
           employee.done.id(doneItem._id).remove();
           employee.save(function(err, updatedDoneItem) {

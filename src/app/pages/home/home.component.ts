@@ -9,6 +9,9 @@ Description: Application to build to do lists
 */
 
 import { Component, OnInit } from '@angular/core';
+import { TaskService } from '../../shared/task.service';
+import { HttpClient } from '@angular/common/http';
+import { Item } from '../../shared/item.interface';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +20,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  // tasks: any;
+  todo: Array<Item>;
+  doing: Array<Item>;
+  done: Array<Item>;
+
+  constructor(private taskService: TaskService, private httpClient: HttpClient) {
+    this.taskService.findAllTasks().subscribe(res => {
+      console.log('This is the response', res);
+      this.todo = res['data'].todo;
+      this.doing = res['data'].doing;
+      this.done = res['data'].done;
+      console.log('This is todo', JSON.stringify(this.todo));
+      console.log('This is doing', JSON.stringify(this.doing));
+      console.log('This is done', JSON.stringify(this.done));
+    }, err => {
+      console.log(err);
+    })
+  }
 
   ngOnInit(): void {
   }
