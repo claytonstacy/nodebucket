@@ -4,9 +4,10 @@
     <nav fxFlex>
       <mat-toolbar color="primary">
         <!-- navbar container -->
-        <div class="navbar-container">
+        <div class="navbar-container" fxFlex>
           <!-- logo -->
-          <img class="logo" routerLink="/" src="../../../assets/Sticky-Note-02-Green 1 (1).png" height="55"/>
+            <img class="logo" routerLink="/" src="../../../assets/Sticky-Note-02-Green 1 (1).png" height="55" style="margin-top: 5px;"/>
+
 
           <button class="navbar-link" routerLink="/" mat-button>Home</button>
           <button class="navbar-link" routerLink="/about" mat-button>About</button>
@@ -28,9 +29,11 @@
     <div fxFlex>
       <footer class="footer">
         <mat-toolbar class="footer-content" color="primary">
-          <p>
-            &copy; {{year | date: 'yyyy'}} - nodebucket - <a href="https://www.bellevue.edu/" class="bu-link" target="_blank">Bellevue University</a>
-          </p>
+          <div fxFlex fxLayoutAlign="center center">
+            <p>
+              &copy; {{year | date: 'yyyy'}} - nodebucket - <a href="https://www.bellevue.edu/" class="bu-link" target="_blank">Bellevue University</a>
+            </p>
+          </div>
         </mat-toolbar>
       </footer>
     </div>

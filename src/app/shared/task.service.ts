@@ -1,4 +1,3 @@
-
 /*
 ============================================
 Title: NodeBucket
@@ -9,18 +8,17 @@ Description: Application to build to do lists
 ============================================
 */
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Item } from './item.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  sessionUser: string;
 
-  constructor(private cookieService: CookieService, private http: HttpClient) {
-    this.sessionUser = this.cookieService.get('session_user');
+  constructor(private http: HttpClient) {
   }
 
 
@@ -28,21 +26,31 @@ export class TaskService {
 findAllTasks
 */
 
-findAllTasks() {
-  return this.http.get('/api/tasks/' + this.sessionUser)
-};
+findAllTasks(empId: string): Observable<any> {
+  return this.http.get('/api/tasks/' + empId)
+}
 
 /*
 createTasks
 */
-
+createTask(empId: string, task: string): Observable<any>{
+  return this.http.post('/api/tasks/' + empId, {
+    text: task
+  })
+}
 
 /*
 updateTasks
 */
+updateTask(empId: string, todo: Item[], done: Item[]): Observable<any> {
+  return this.http.put('/api/tasks/' + empId, {
+    todo,
+    done
+  });
+}
 
-/*
-deleteTasks
-*/
+deleteTask(empId: string, taskId: string): Observable<any> {
+  return this.http.delete('/api/tasks/' + empId + '/' + taskId);
+}
 
 }
