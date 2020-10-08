@@ -1,7 +1,6 @@
-<div fxLayout="column">
-
-    <!-- navigation -->
-    <nav fxFlex>
+<div fxLayout="column" fxLayoutAlign="space-between stretch" class="main-container">
+  <div fxFlex="15" class="nav-container">
+    <nav>
       <mat-toolbar color="primary">
         <!-- navbar container -->
         <div class="navbar-container" fxFlex>
@@ -17,25 +16,23 @@
 
       </mat-toolbar>
     </nav>
-
-    <!-- main content -->
-    <div fxFlex>
-      <main class="main-content" fxFlex="100%;">
-        <router-outlet></router-outlet>
-      </main>
-    </div>
+  </div>
+  <!-- main content -->
+  <div fxFlex="75">
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 
     <!-- footer -->
-    <div fxFlex>
-      <footer class="footer">
-        <mat-toolbar class="footer-content" color="primary">
-          <div fxFlex fxLayoutAlign="center center">
-            <p>
+  <div fxFlex="10" class="footer-container">
+    <footer class="footer">
+      <mat-toolbar class="footer-content" color="primary">
+            <p class="footer-text">
               &copy; {{year | date: 'yyyy'}} - nodebucket - <a href="https://www.bellevue.edu/" class="bu-link" target="_blank">Bellevue University</a>
             </p>
-          </div>
-        </mat-toolbar>
-      </footer>
-    </div>
+      </mat-toolbar>
+    </footer>
+  </div>
 
   </div>

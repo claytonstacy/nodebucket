@@ -1,13 +1,13 @@
 <div fxLayout="column" class="main-welcome">
   <div fxFlex>
     <h1 class="title">
-      Welcome to WEB 450's - nodebucket Project <br />
+      Welcome NodeBucket<br />
       <span class="subtitle">
-        Pay close attention to the requirements, double and triple check the files for code attribution, and do not wait unitl the last minute to begin working on each item.
+        Let's get organized!
       </span>
     </h1>
   </div>
-  <div fxFlex>
+  <div>
     <div class="create-task-container" fxLayout="column">
       <button mat-raised-button color="accent" (click)="openCreateTaskDialog()">Create New Task</button>
     </div>
@@ -17,7 +17,6 @@
   <div fxFlex >
     <div fxLayout="row" fxLayoutGap="15px" class="task-container">
       <div fxFlex>
-
         <mat-card class="mat-elevation-z0">
           <mat-card-title>
             To Do
@@ -30,14 +29,65 @@
             cdkDropList
             #todoList='cdkDropList'
             [cdkDropListData]="todo"
-            [cdkDropListConnectedTo]="[doneList]"
+            [cdkDropListConnectedTo]="[doneList, doingList]"
             (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of todo" cdkDrag>
-              <mat-card class="mat-elevation-z0" task-card>
+              <mat-card class="mat-elevation-z0 task-card">
                 <mat-card-content>
                   <div fxLayout="row">
                     <div fxFlex>
                       {{ item.text }}
+                    </div>
+                    <div fxFlex fxLayoutAlign="end">
+                      <button [matMenuTriggerFor]="todoOptions" class="task-options-menu" mat-icon-button>
+                        <mat-icon>more_horiz</mat-icon>
+                        <mat-menu #todoOptions="matMenu" x-position="before">
+                          <button mat-menu-item (click)="deleteTask(item._id)">
+                            Remove
+                          </button>
+                        </mat-menu>
+                      </button>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+      <div fxFlex>
+        <mat-card class="mat-elevation-z0">
+          <mat-card-title>
+            Doing
+          </mat-card-title>
+          <mat-card-content>
+            <div
+            fxLayout="column"
+            fxLayoutGap="10px"
+            class="task-list"
+            cdkDropList
+            #doingList='cdkDropList'
+            [cdkDropListData]="doing"
+            [cdkDropListConnectedTo]="[doneList, todoList]"
+            (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let item of doing" cdkDrag>
+              <mat-card class="mat-elevation-z0 task-card">
+                <mat-card-content>
+                  <div fxLayout="row">
+                    <div fxFlex>
+                      {{ item.text }}
+                    </div>
+                    <div fxFlex fxLayoutAlign="end">
+                      <button [matMenuTriggerFor]="doingOptions" class="task-options-menu" mat-icon-button>
+                        <mat-icon>more_horiz</mat-icon>
+                        <mat-menu #doingOptions="matMenu" x-position="before">
+                          <button mat-menu-item (click)="deleteTask(item._id)">
+                            Remove
+                          </button>
+                        </mat-menu>
+                      </button>
                     </div>
                   </div>
                 </mat-card-content>
@@ -61,19 +111,19 @@
             cdkDropList
             #doneList='cdkDropList'
             [cdkDropListData]="done"
-            [cdkDropListConnectedTo]="[todoList]"
+            [cdkDropListConnectedTo]="[todoList, doingList]"
             (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of done" cdkDrag>
-              <mat-card class="mat-elevation-z0" task-card>
+              <mat-card class="mat-elevation-z0 task-card">
                 <mat-card-content>
                   <div fxLayout="row">
                     <div fxFlex>
                       {{ item.text }}
                     </div>
                     <div fxFlex fxLayoutAlign="end">
-                      <button [matMenuTriggerFor]="todoOptions" class="task-options-menu" mat-icon-button>
+                      <button [matMenuTriggerFor]="doneOptions" class="task-options-menu" mat-icon-button>
                         <mat-icon>more_horiz</mat-icon>
-                        <mat-menu #todoOptions="matMenu" x-position="before">
+                        <mat-menu #doneOptions="matMenu" x-position="before">
                           <button mat-menu-item (click)="deleteTask(item._id)">
                             Remove
                           </button>

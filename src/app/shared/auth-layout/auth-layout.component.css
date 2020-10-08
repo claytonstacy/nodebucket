@@ -20,16 +20,22 @@
   padding-left: 30px;
 }
 
+.footer-text {
+  width: 45%;
+  margin: 0 auto;
+}
+
+.footer-container{
+  max-height: 65px;
+}
 .footer {
   bottom: 0;
-  position: absolute;
   width: 100%;
 }
 
 .footer-content {
   font-size: 16px;
   font-weight: lighter;
-  padding-left: 100px;
   letter-spacing: 3px;
   align-self: flex-end;
 }
