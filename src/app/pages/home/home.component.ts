@@ -36,16 +36,13 @@ export class HomeComponent implements OnInit {
     this.empId = this.cookieService.get('session_user');
 
     this.taskService.findAllTasks(this.empId).subscribe(res => {
-      console.log('This is the response', res);
       this.employee = res.data;
-      console.log('This is the employee', JSON.stringify(this.employee));
     }, err => {
       console.log(err);
     }, () => {
       this.todo = this.employee.todo;
       this.doing = this.employee.doing;
       this.done = this.employee.done;
-      console.log('This is the complete function', this.todo, this.doing, this.done);
     })
   }
 
@@ -54,27 +51,25 @@ export class HomeComponent implements OnInit {
   drop(event: CdkDragDrop<any[]>) {
     if(event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log('Reordered the existing list of task items');
-      this.updateTaskList(this.empId, this.todo, this.done)
+      this.updateTaskList(this.empId, this.todo, this.doing, this.done)
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-      console.log('Moved task item to the new container');
-      this.updateTaskList(this.empId, this.todo, this.done)
+      this.updateTaskList(this.empId, this.todo, this.doing, this.done)
     }
   }
 
-  private updateTaskList(empId: string, todo: Item[], done: Item[]): void {
-    this.taskService.updateTask(empId, todo, done).subscribe(res => {
+  private updateTaskList(empId: string, todo: Item[], doing: Item[], done: Item[]): void {
+    this.taskService.updateTask(empId, todo, doing, done).subscribe(res => {
       this.employee = res.data;
     }, err => {
       console.log(err)
     }, () => {
       this.todo = this.employee.todo;
+      this.doing = this.employee.doing;
       this.done = this.employee.done;
     })
   }
   openCreateTaskDialog() {
-    console.log('Opening, master');
     const dialogRef = this.dialog.open(CreateTaskDialogComponent, {
       disableClose: true
     })
@@ -87,6 +82,7 @@ export class HomeComponent implements OnInit {
           console.log(err);
         }, () => {
           this.todo = this.employee.todo;
+          this.doing= this.employee.doing;
           this.done = this.employee.done;
         })
       }
@@ -94,9 +90,19 @@ export class HomeComponent implements OnInit {
   }
   deleteTask(taskId: string) {
     if(taskId) {
-      console.log('Task item was deleted');
+      console.log('Deleting Task', this.empId, taskId);
 
-      this.taskService.deleteTask(this.empId, taskId)
+      this.taskService.deleteTask(this.empId, taskId).subscribe(res => {
+        this.employee = res.data;
+      }, err => {
+        console.log(err);
+      }, () => {
+        this.todo= this.employee.todo;
+        this.doing= this.employee.doing;
+        this.done= this.employee.done;
+      });
+    }else {
+      console.log('Trying to delete but no id');
     }
   }
 }

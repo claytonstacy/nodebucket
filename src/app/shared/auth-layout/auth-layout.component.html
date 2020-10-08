@@ -1,7 +1,7 @@
 <div fxLayout="column" class="auth-container">
 
   <!-- navigation -->
-  <nav fxFlex="20">
+  <nav fxFlex="15">
     <mat-toolbar color="primary">
       <!-- navbar container -->
       <div class="navbar-container">
@@ -17,17 +17,17 @@
   </nav>
 
   <!-- main content -->
-  <div fxFlex="80">
+  <div fxFlex="75">
     <main class="main-content">
       <router-outlet></router-outlet>
     </main>
   </div>
 
   <!-- footer -->
-  <div>
+  <div fxFlex="10" class="footer-container">
     <footer class="footer">
       <mat-toolbar class="footer-content" color="primary">
-        <p>
+        <p class="footer-text">
           &copy; {{year | date: 'yyyy'}} - nodebucket - <a href="https://www.bellevue.edu/" class="bu-link" target="_blank">Bellevue University</a>
         </p>
       </mat-toolbar>

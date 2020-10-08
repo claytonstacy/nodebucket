@@ -42,15 +42,16 @@ createTask(empId: string, task: string): Observable<any>{
 /*
 updateTasks
 */
-updateTask(empId: string, todo: Item[], done: Item[]): Observable<any> {
+updateTask(empId: string, todo: Item[], doing: Item[], done: Item[]): Observable<any> {
   return this.http.put('/api/tasks/' + empId, {
     todo,
+    doing,
     done
   });
 }
 
 deleteTask(empId: string, taskId: string): Observable<any> {
-  return this.http.delete('/api/tasks/' + empId + '/' + taskId);
+  return this.http.delete(`/api/tasks/${empId}/${taskId}`);
 }
 
 }
