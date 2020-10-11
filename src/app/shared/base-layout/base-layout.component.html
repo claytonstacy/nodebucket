@@ -1,31 +1,39 @@
 <div fxLayout="column" fxLayoutAlign="space-between stretch" class="main-container">
-  <div fxFlex="15" class="nav-container">
+  <div fxFlex="10" class="nav-container">
     <nav>
       <mat-toolbar color="primary">
         <!-- navbar container -->
-        <div class="navbar-container" fxFlex>
+        <div class="navbar-container" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxFlex>
           <!-- logo -->
+          <div fxFlex="5">
             <img class="logo" routerLink="/" src="../../../assets/Sticky-Note-02-Green 1 (1).png" height="55" style="margin-top: 5px;"/>
-
-
-          <button class="navbar-link" routerLink="/" mat-button>Home</button>
-          <button class="navbar-link" routerLink="/about" mat-button>About</button>
-          <button class="navbar-link" mat-button routerLink="/contact">Contact</button>
-          <button class="navbar-link" mat-button (click)="logout()">Logout</button>
+          </div>
+          <div fxFlex="6">
+            <button class="navbar-link" routerLink="/" mat-button>Home</button>
+          </div>
+          <div fxFlex="8">
+            <button class="navbar-link" mat-button routerLink="/contact">Contact</button>
+          </div>
+          <div fxFlex="5">
+            <button class="navbar-link" routerLink="/about" mat-button>About</button>
+          </div>
+          <div fxFlex fxLayoutAlign="end center">
+            <button class="navbar-link" mat-button (click)="logout()">Logout</button>
+          </div>
         </div>
 
       </mat-toolbar>
     </nav>
   </div>
   <!-- main content -->
-  <div fxFlex="75">
+  <div fxFlex>
     <main class="main-content">
       <router-outlet></router-outlet>
     </main>
   </div>
 
     <!-- footer -->
-  <div fxFlex="10" class="footer-container">
+  <div fxFlex="5">
     <footer class="footer">
       <mat-toolbar class="footer-content" color="primary">
             <p class="footer-text">

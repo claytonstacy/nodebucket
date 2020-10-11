@@ -37,6 +37,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { CreateTaskDialogComponent } from './shared/create-task-dialog/create-task-dialog.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDividerModule,
     DragDropModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
