@@ -32,7 +32,7 @@ app.use('/', express.static(path.join(__dirname, '../dist/nodebucket')));
 /**
  * Variables
  */
-const port = 3000; // server port
+const port = process.env.PORT || 3000; // server port
 
 const conn = 'mongodb+srv://nodebucket_user:BB9UTtvubL0itcs3@buwebdev-cluster-1.xyv9m.mongodb.net/nodebucket?retryWrites=true&w=majority';
 
