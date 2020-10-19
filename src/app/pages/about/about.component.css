@@ -5,3 +5,8 @@
 .about-content {
   margin: 5px 20px;
 }
+
+.responsive-img {
+  width: 100%;
+  height: auto;
+}
